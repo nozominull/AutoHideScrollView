@@ -6,6 +6,18 @@ ScrollView supports scroll hide/show header&amp;footer,pull refresh and pull loa
 
 edit from [PinterestLikeAdapterView][1] and [PullRefreshScrollView][2],thanks to them.
 
+Screen Shot
+----------------
+This is a screen shot of sample activity.
+
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/1.png)
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/2.png)
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/3.png)
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/4.png)
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/5.png)
+![image](https://raw.github.com/xuyangbill/AutoHideScrollView/master/screenshots/6.png)
+
+
 How to use
 -------------
 
