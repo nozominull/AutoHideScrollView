@@ -140,7 +140,7 @@ public class AutoHideScrollView extends ScrollView {
 		if (autoHideFooterView != null
 				&& autoHideFooterView.getVisibility() == View.VISIBLE) {
 			autoHideFooterView.setVisibility(View.INVISIBLE);
-			if (topicBarHideAnimation == null) {
+			if (footBarHideAnimation == null) {
 				if (autoHideHeaderView.getHeight() != 0) {
 					footBarHideAnimation = new TranslateAnimation(0, 0, 0,
 							autoHideFooterView.getHeight());
