@@ -56,24 +56,7 @@ public class AutoHideScrollView extends ScrollView {
 								((RelativeLayout.LayoutParams) vglp).topMargin = 0;
 							}
 							setLayoutParams(vglp);
-							if (autoHideHeaderView != null) {
-								topicBarShowAnimation = new TranslateAnimation(
-										0, 0, -autoHideHeaderView.getHeight(),
-										0);
-								topicBarShowAnimation.setDuration(500);
-								topicBarHideAnimation = new TranslateAnimation(
-										0, 0, 0, -autoHideHeaderView
-												.getHeight());
-								topicBarHideAnimation.setDuration(500);
-							}
-							if (autoHideFooterView != null) {
-								footBarShowAnimation = new TranslateAnimation(
-										0, 0, autoHideFooterView.getHeight(), 0);
-								footBarShowAnimation.setDuration(500);
-								footBarHideAnimation = new TranslateAnimation(
-										0, 0, 0, autoHideFooterView.getHeight());
-								footBarHideAnimation.setDuration(500);
-							}
+
 							setOnTouchListener(new OnTouchListener() {
 
 								@Override
@@ -110,12 +93,31 @@ public class AutoHideScrollView extends ScrollView {
 		if (autoHideHeaderView != null
 				&& autoHideHeaderView.getVisibility() == View.INVISIBLE) {
 			autoHideHeaderView.setVisibility(View.VISIBLE);
-			autoHideHeaderView.startAnimation(topicBarShowAnimation);
+			if (topicBarShowAnimation == null) {
+				if (autoHideHeaderView.getHeight() != 0) {
+					topicBarShowAnimation = new TranslateAnimation(0, 0,
+							-autoHideHeaderView.getHeight(), 0);
+					topicBarShowAnimation.setDuration(500);
+					autoHideHeaderView.startAnimation(topicBarShowAnimation);
+				}
+			} else {
+				autoHideHeaderView.startAnimation(topicBarShowAnimation);
+			}
 		}
+
 		if (autoHideFooterView != null
 				&& autoHideFooterView.getVisibility() == View.INVISIBLE) {
 			autoHideFooterView.setVisibility(View.VISIBLE);
-			autoHideFooterView.startAnimation(footBarShowAnimation);
+			if (footBarShowAnimation == null) {
+				if (autoHideFooterView.getHeight() != 0) {
+					footBarShowAnimation = new TranslateAnimation(0, 0,
+							autoHideFooterView.getHeight(), 0);
+					footBarShowAnimation.setDuration(500);
+					autoHideFooterView.startAnimation(footBarShowAnimation);
+				}
+			} else {
+				autoHideFooterView.startAnimation(footBarShowAnimation);
+			}
 		}
 	}
 
@@ -123,12 +125,31 @@ public class AutoHideScrollView extends ScrollView {
 		if (autoHideHeaderView != null
 				&& autoHideHeaderView.getVisibility() == View.VISIBLE) {
 			autoHideHeaderView.setVisibility(View.INVISIBLE);
-			autoHideHeaderView.startAnimation(topicBarHideAnimation);
+
+			if (topicBarHideAnimation == null) {
+				if (autoHideHeaderView.getHeight() != 0) {
+					topicBarHideAnimation = new TranslateAnimation(0, 0, 0,
+							-autoHideHeaderView.getHeight());
+					topicBarHideAnimation.setDuration(500);
+					autoHideHeaderView.startAnimation(topicBarHideAnimation);
+				}
+			} else {
+				autoHideHeaderView.startAnimation(topicBarHideAnimation);
+			}
 		}
 		if (autoHideFooterView != null
 				&& autoHideFooterView.getVisibility() == View.VISIBLE) {
 			autoHideFooterView.setVisibility(View.INVISIBLE);
-			autoHideFooterView.startAnimation(footBarHideAnimation);
+			if (topicBarHideAnimation == null) {
+				if (autoHideHeaderView.getHeight() != 0) {
+					footBarHideAnimation = new TranslateAnimation(0, 0, 0,
+							autoHideFooterView.getHeight());
+					footBarHideAnimation.setDuration(500);
+					autoHideFooterView.startAnimation(footBarHideAnimation);
+				}
+			} else {
+				autoHideFooterView.startAnimation(footBarHideAnimation);
+			}
 		}
 	}
 
