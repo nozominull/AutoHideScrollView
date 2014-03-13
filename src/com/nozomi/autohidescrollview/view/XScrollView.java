@@ -196,7 +196,7 @@ public class XScrollView extends ScrollView {
 			mLastY = -1000;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			// 判断是不�?首次移动,
+			// 判断是不是首次移动
 			if (-1000 == mLastY) {
 				mLastY = ev.getY();
 				mDowY = ev.getY();
