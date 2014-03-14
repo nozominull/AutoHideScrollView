@@ -71,7 +71,9 @@ public class AutoHideScrollView extends ScrollView {
 											scrollY = y;
 										} else if (y > scrollY + 3) {
 											showHeaderAndFooter();
-										} else if (y + 3 < scrollY) {
+										} else if (y + 3 < scrollY
+												&& getScrollY() > autoHideHeaderView
+														.getHeight()) {
 											hideHeaderAndFooter();
 										}
 										scrollY = y;
