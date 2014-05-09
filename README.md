@@ -58,6 +58,7 @@ How to use
     <View
         android:id="@+id/footer"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>
