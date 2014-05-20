@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.nozomi.autohidescrollview.R;
-import com.nozomi.autohidescrollview.view.BounceListView;
-
+import com.nozomi.autohidescrollview.view.BounceGridView;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -22,7 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ScrollViewActivity extends Activity {
+public class BounceGridViewActivity extends Activity {
 
 	private ScrollView scrollView = null;
 	private ArrayList<String> nameArray = new ArrayList<String>();
@@ -32,7 +31,7 @@ public class ScrollViewActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.scroll_view_activity);
+		setContentView(R.layout.bounce_grid_view_activity);
 
 		initView();
 
@@ -43,7 +42,7 @@ public class ScrollViewActivity extends Activity {
 
 		scrollView = (ScrollView) findViewById(R.id.scroll);
 
-		BounceListView itemListView = (BounceListView) findViewById(R.id.item_list);
+		BounceGridView itemListView = (BounceGridView) findViewById(R.id.item_list);
 		itemAdapter = new ItemAdapter(this);
 		itemListView.setAdapter(itemAdapter);
 
@@ -52,7 +51,7 @@ public class ScrollViewActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(ScrollViewActivity.this,
+				Toast.makeText(BounceGridViewActivity.this,
 						nameArray.get(position), Toast.LENGTH_SHORT).show();
 
 			}

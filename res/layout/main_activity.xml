@@ -5,11 +5,18 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/scroll_view"
+        android:id="@+id/bounce_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="ScrollView" />
+        android:text="BounceListView" />
+    
+        <Button
+        android:id="@+id/bounce_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="BounceGridView" />
 
     <Button
         android:id="@+id/auto_hide_scroll_view"

@@ -23,7 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nozomi.autohidescrollview.activity.ScrollViewActivity"
+            android:name="com.nozomi.autohidescrollview.activity.BounceListViewActivity"
+            android:label="@string/app_name" >
+        </activity>
+                <activity
+            android:name="com.nozomi.autohidescrollview.activity.BounceGridViewActivity"
             android:label="@string/app_name" >
         </activity>
         <activity

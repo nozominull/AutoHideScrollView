@@ -20,13 +20,24 @@ public class MainActivity extends Activity {
 	}
 
 	private void initView() {
-		Button scrollViewView = (Button) findViewById(R.id.scroll_view);
-		scrollViewView.setOnClickListener(new OnClickListener() {
+		Button bounceListView = (Button) findViewById(R.id.bounce_list_view);
+		bounceListView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this,
-						ScrollViewActivity.class);
+						BounceListViewActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		Button bounceGridView = (Button) findViewById(R.id.bounce_grid_view);
+		bounceGridView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						BounceGridViewActivity.class);
 				startActivity(intent);
 			}
 		});
