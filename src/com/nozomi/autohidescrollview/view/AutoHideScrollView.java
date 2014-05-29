@@ -1,6 +1,8 @@
 package com.nozomi.autohidescrollview.view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +16,14 @@ public class AutoHideScrollView extends ScrollView {
 
 	private View autoHideHeaderView = null;
 	private View autoHideFooterView = null;
+	private boolean isAnimation = true;
 
 	private Animation topicBarShowAnimation = null;
 	private Animation topicBarHideAnimation = null;
 	private Animation footBarShowAnimation = null;
 	private Animation footBarHideAnimation = null;
+
+	private int lastt = 0;
 
 	public AutoHideScrollView(Context context) {
 		super(context);
@@ -27,14 +32,23 @@ public class AutoHideScrollView extends ScrollView {
 
 	public AutoHideScrollView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
 	}
 
+	public AutoHideScrollView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void setHeaderAndFooter(final View autoHideHeaderView,
-			final View autoHideFooterView) {
+			final View autoHideFooterView, boolean isAnimation) {
+		if (!isAnimation
+				&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+			setOverScrollMode(OVER_SCROLL_NEVER);
+		}
 
 		this.autoHideHeaderView = autoHideHeaderView;
 		this.autoHideFooterView = autoHideFooterView;
+		this.isAnimation = isAnimation;
 
 		getViewTreeObserver().addOnGlobalLayoutListener(
 				new OnGlobalLayoutListener() {
@@ -51,7 +65,7 @@ public class AutoHideScrollView extends ScrollView {
 							((RelativeLayout.LayoutParams) vglp).topMargin = 0;
 							setLayoutParams(vglp);
 						}
-						
+
 						getViewTreeObserver()
 								.removeGlobalOnLayoutListener(this);
 
@@ -62,12 +76,50 @@ public class AutoHideScrollView extends ScrollView {
 	@Override
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		super.onScrollChanged(l, t, oldl, oldt);
-		if (t > oldt
-				&& (autoHideHeaderView == null || t > autoHideHeaderView
-						.getHeight())) {
-			hideHeaderAndFooter();
-		} else if (oldt - t > 3) {
-			showHeaderAndFooter();
+		if (isAnimation) {
+			if (t > oldt
+					&& (autoHideHeaderView == null || t > autoHideHeaderView
+							.getHeight())) {
+				hideHeaderAndFooter();
+			} else if (oldt - t > 3) {
+				showHeaderAndFooter();
+			}
+		} else {
+			if (lastt != t) {
+				if (autoHideHeaderView != null) {
+					ViewGroup.LayoutParams vglp = (ViewGroup.LayoutParams) autoHideHeaderView
+							.getLayoutParams();
+					if (vglp instanceof RelativeLayout.LayoutParams) {
+						int topMargin = ((RelativeLayout.LayoutParams) vglp).topMargin;
+						topMargin -= t - lastt;
+						if (topMargin < -autoHideHeaderView.getHeight()) {
+							topMargin = -autoHideHeaderView.getHeight();
+						} else if (topMargin > 0) {
+							topMargin = 0;
+						}
+						((RelativeLayout.LayoutParams) vglp).topMargin = topMargin;
+						autoHideHeaderView.setLayoutParams(vglp);
+					}
+				}
+
+				if (autoHideFooterView != null) {
+					ViewGroup.LayoutParams vglp = (ViewGroup.LayoutParams) autoHideFooterView
+							.getLayoutParams();
+					if (vglp instanceof RelativeLayout.LayoutParams) {
+						int bottomMargin = ((RelativeLayout.LayoutParams) vglp).bottomMargin;
+						bottomMargin -= t - lastt;
+						if (bottomMargin < -autoHideFooterView.getHeight()) {
+							bottomMargin = -autoHideFooterView.getHeight();
+						} else if (bottomMargin > 0) {
+							bottomMargin = 0;
+						}
+						((RelativeLayout.LayoutParams) vglp).bottomMargin = bottomMargin;
+						autoHideFooterView.setLayoutParams(vglp);
+					}
+				}
+
+				lastt = t;
+			}
 		}
 	}
 

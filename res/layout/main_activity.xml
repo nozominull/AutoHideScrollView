@@ -24,6 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="AutoHideScrollView" />
+    <Button
+        android:id="@+id/auto_hide_scroll_view_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="AutoHideScrollView(animation)" />
 
     <Button
         android:id="@+id/xscroll_view"
@@ -33,10 +39,18 @@
         android:text="XScrollView" />
 
     <Button
-        android:id="@+id/auto_hide_xscrollView"
+        android:id="@+id/auto_hide_xscroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="AutoHideXScrollView" />
+    
+    
+        <Button
+        android:id="@+id/auto_hide_xscroll_view_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="AutoHideXScrollView(animation)" />
 
 </LinearLayout>

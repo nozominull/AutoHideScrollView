@@ -29,12 +29,13 @@ public class AutoHideXScrollViewActivity extends Activity {
 	private ArrayList<String> nameArray = new ArrayList<String>();
 	private ItemAdapter itemAdapter = null;
 	private Random random = new Random();
+	private boolean isAnimation = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.auto_hide_xscroll_view_activity);
-
+		isAnimation = getIntent().getExtras().getBoolean("is_animation");
 		initView();
 
 		handler.sendMessageDelayed(handler.obtainMessage(1), 1000);
@@ -44,7 +45,7 @@ public class AutoHideXScrollViewActivity extends Activity {
 		TextView headerView = (TextView) findViewById(R.id.header);
 		TextView footerView = (TextView) findViewById(R.id.footer);
 		scrollView = (AutoHideXScrollView) findViewById(R.id.scroll);
-		scrollView.setHeaderAndFooter(headerView, footerView);
+		scrollView.setHeaderAndFooter(headerView, footerView, isAnimation);
 		scrollView.setXScrollViewListener(new IXScrollViewListener() {
 
 			@Override

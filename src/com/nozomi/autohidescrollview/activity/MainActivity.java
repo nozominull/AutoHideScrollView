@@ -49,6 +49,20 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this,
 						AutoHideScrollViewActivity.class);
+				intent.putExtra("is_animation", false);
+				startActivity(intent);
+			}
+		});
+		
+		
+		Button autoHideScrollViewAniamtionView = (Button) findViewById(R.id.auto_hide_scroll_view_animation);
+		autoHideScrollViewAniamtionView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						AutoHideScrollViewActivity.class);
+				intent.putExtra("is_animation", true);
 				startActivity(intent);
 			}
 		});
@@ -64,13 +78,27 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		Button AutoHideXScrollViewView = (Button) findViewById(R.id.auto_hide_xscrollView);
+		Button AutoHideXScrollViewView = (Button) findViewById(R.id.auto_hide_xscroll_view);
 		AutoHideXScrollViewView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this,
 						AutoHideXScrollViewActivity.class);
+				intent.putExtra("is_animation", false);
+				startActivity(intent);
+			}
+		});
+		
+		
+		Button AutoHideXScrollViewAnimationView = (Button) findViewById(R.id.auto_hide_xscroll_view_animation);
+		AutoHideXScrollViewAnimationView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						AutoHideXScrollViewActivity.class);
+				intent.putExtra("is_animation", true);
 				startActivity(intent);
 			}
 		});

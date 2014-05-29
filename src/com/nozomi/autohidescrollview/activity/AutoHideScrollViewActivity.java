@@ -28,12 +28,15 @@ public class AutoHideScrollViewActivity extends Activity {
 	private ArrayList<String> nameArray = new ArrayList<String>();
 	private ItemAdapter itemAdapter = null;
 	private Random random = new Random();
+	private boolean isAnimation = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.auto_hide_scroll_view_activity);
 
+		isAnimation=getIntent().getExtras().getBoolean("is_animation");
+		
 		initView();
 
 		handler.sendMessageDelayed(handler.obtainMessage(1), 1000);
@@ -43,7 +46,7 @@ public class AutoHideScrollViewActivity extends Activity {
 		TextView headerView = (TextView) findViewById(R.id.header);
 		TextView footerView = (TextView) findViewById(R.id.footer);
 		scrollView = (AutoHideScrollView) findViewById(R.id.scroll);
-		scrollView.setHeaderAndFooter(headerView, footerView);
+		scrollView.setHeaderAndFooter(headerView, footerView, isAnimation);
 
 		BounceListView itemListView = (BounceListView) findViewById(R.id.item_list);
 		itemAdapter = new ItemAdapter(this);
@@ -185,6 +188,8 @@ public class AutoHideScrollViewActivity extends Activity {
 			TextView rightNameView;
 		}
 	}
+
+
 
 	private Handler handler = new Handler() {
 		@Override
