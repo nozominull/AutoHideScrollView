@@ -30,13 +30,13 @@ public class XScrollView extends ScrollView {
 
 	private static final int PULL_TO_REFRESH_STATUS = 0x00;
 	private static final int RELEASE_TO_REFRESH_STATUS = 0x01;
-	private static final int REFRESHING_STATUS = 0x02;
+	protected static final int REFRESHING_STATUS = 0x02;
 	private static final int NORMAL_STATUS = 0x03;
 
 	// mode head or foot
 	private static final int HEAD_MODE = 0x00;
 	private static final int FOOT_MODE = 0x01;
-	private int mStatus = NORMAL_STATUS;
+	protected int mStatus = NORMAL_STATUS;
 	private int mMode = HEAD_MODE;
 	protected RelativeLayout mContentLy;
 	private float mLastY = -1000;

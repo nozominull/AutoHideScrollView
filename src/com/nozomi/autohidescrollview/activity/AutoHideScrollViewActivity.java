@@ -191,7 +191,7 @@ public class AutoHideScrollViewActivity extends Activity {
 		public void handleMessage(Message msg) {
 			if (msg.what == 1) {
 				nameArray.clear();
-				for (int i = 0; i < 20; i++) {
+				for (int i = 0; i < 50; i++) {
 					nameArray.add("name" + random.nextInt());
 				}
 				itemAdapter.notifyDataSetChanged();

@@ -2,7 +2,6 @@ package com.nozomi.autohidescrollview.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -15,9 +14,6 @@ public class AutoHideScrollView extends ScrollView {
 
 	private View autoHideHeaderView = null;
 	private View autoHideFooterView = null;
-
-	private boolean isInit = false;
-	private int scrollY = 0;
 
 	private Animation topicBarShowAnimation = null;
 	private Animation topicBarHideAnimation = null;
@@ -45,53 +41,38 @@ public class AutoHideScrollView extends ScrollView {
 
 					@Override
 					public void onGlobalLayout() {
-						if (!isInit) {
-							isInit = true;
-							ViewGroup.LayoutParams vglp = (ViewGroup.LayoutParams) getLayoutParams();
-							if (vglp instanceof RelativeLayout.LayoutParams) {
-								View view = getChildAt(0);
-								view.setPadding(0, getTop(), 0, 0);
-								((RelativeLayout.LayoutParams) vglp).addRule(
-										RelativeLayout.BELOW, 0);
-								((RelativeLayout.LayoutParams) vglp).topMargin = 0;
-							}
+
+						ViewGroup.LayoutParams vglp = (ViewGroup.LayoutParams) getLayoutParams();
+						if (vglp instanceof RelativeLayout.LayoutParams) {
+							View view = getChildAt(0);
+							view.setPadding(0, getTop(), 0, 0);
+							((RelativeLayout.LayoutParams) vglp).addRule(
+									RelativeLayout.BELOW, 0);
+							((RelativeLayout.LayoutParams) vglp).topMargin = 0;
 							setLayoutParams(vglp);
-
-							setOnTouchListener(new OnTouchListener() {
-
-								@Override
-								public boolean onTouch(View v, MotionEvent event) {
-									int y = (int) event.getY();
-									switch (event.getAction()) {
-									case MotionEvent.ACTION_DOWN:
-										scrollY = y;
-										break;
-									case MotionEvent.ACTION_MOVE:
-										if (scrollY == -1) {
-											scrollY = y;
-										} else if (y > scrollY + 3) {
-											showHeaderAndFooter();
-										} else if (y + 3 < scrollY
-												&& getScrollY() > autoHideHeaderView
-														.getHeight()) {
-											hideHeaderAndFooter();
-										}
-										scrollY = y;
-										break;
-									case MotionEvent.ACTION_UP:
-										scrollY = -1;
-										break;
-									}
-									return false;
-								}
-							});
-
 						}
+						
+						getViewTreeObserver()
+								.removeGlobalOnLayoutListener(this);
+
 					}
 				});
 	}
 
+	@Override
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+		super.onScrollChanged(l, t, oldl, oldt);
+		if (t > oldt
+				&& (autoHideHeaderView == null || t > autoHideHeaderView
+						.getHeight())) {
+			hideHeaderAndFooter();
+		} else if (oldt - t > 3) {
+			showHeaderAndFooter();
+		}
+	}
+
 	public void showHeaderAndFooter() {
+
 		if (autoHideHeaderView != null
 				&& autoHideHeaderView.getVisibility() == View.INVISIBLE) {
 			autoHideHeaderView.setVisibility(View.VISIBLE);
