@@ -22,7 +22,7 @@ public class AutoHideXScrollView extends XScrollView {
 	private Animation footBarShowAnimation = null;
 	private Animation footBarHideAnimation = null;
 
-	private int lastt = 0;
+	private int lastT = 0;
 
 	public AutoHideXScrollView(Context context) {
 		super(context);
@@ -82,13 +82,13 @@ public class AutoHideXScrollView extends XScrollView {
 				showHeaderAndFooter();
 			}
 		} else {
-			if (lastt != t) {
+			if (lastT != t) {
 				if (autoHideHeaderView != null) {
 					ViewGroup.LayoutParams vglp = (ViewGroup.LayoutParams) autoHideHeaderView
 							.getLayoutParams();
 					if (vglp instanceof RelativeLayout.LayoutParams) {
 						int topMargin = ((RelativeLayout.LayoutParams) vglp).topMargin;
-						topMargin -= t - lastt;
+						topMargin -= t - lastT;
 						if (topMargin < -autoHideHeaderView.getHeight()) {
 							topMargin = -autoHideHeaderView.getHeight();
 						} else if (topMargin > 0) {
@@ -104,7 +104,7 @@ public class AutoHideXScrollView extends XScrollView {
 							.getLayoutParams();
 					if (vglp instanceof RelativeLayout.LayoutParams) {
 						int bottomMargin = ((RelativeLayout.LayoutParams) vglp).bottomMargin;
-						bottomMargin -= t - lastt;
+						bottomMargin -= t - lastT;
 						if (bottomMargin < -autoHideFooterView.getHeight()) {
 							bottomMargin = -autoHideFooterView.getHeight();
 						} else if (bottomMargin > 0) {
@@ -115,7 +115,7 @@ public class AutoHideXScrollView extends XScrollView {
 					}
 				}
 
-				lastt = t;
+				lastT = t;
 			}
 		}
 	}
