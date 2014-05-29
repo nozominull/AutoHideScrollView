@@ -58,15 +58,15 @@ How to use
     <View
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
 ```
 
 ```java
 AutoHideXScrollView scrollView = (AutoHideXScrollView) findViewById(R.id.scroll);
-scrollView.setHeaderAndFooter(headerView, footerView);
+scrollView.setHeaderAndFooter(headerView, footerView, true);//use animation way or another.plz run demo 2 c.
 scrollView.setPullRefreshEnable(true);//default true;set false if you do not want to pull refresh
 scrollView.setPullLoadEnable(true);//default true;set false if you do not want to pull load more	
 scrollView.setXScrollViewListener(new IXScrollViewListener() {
