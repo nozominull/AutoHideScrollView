@@ -41,10 +41,8 @@ public class AutoHideScrollView extends ScrollView {
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void setHeaderAndFooter(final View autoHideHeaderView,
 			final View autoHideFooterView, boolean isAnimation) {
-		if (!isAnimation
-				&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-			setOverScrollMode(OVER_SCROLL_NEVER);
-		}
+
+		setOverScrollMode(OVER_SCROLL_NEVER);
 
 		this.autoHideHeaderView = autoHideHeaderView;
 		this.autoHideFooterView = autoHideFooterView;

@@ -59,7 +59,7 @@ public class XScrollView extends ScrollView {
 	private final static int SCROLL_DURATION = 200;
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss",
-			Locale.CHINA);
+			Locale.getDefault());
 
 	public interface OnScrollUpDownListener {
 		public void onScrollUp(boolean isUp);
