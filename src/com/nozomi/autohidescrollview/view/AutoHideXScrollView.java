@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 public class AutoHideXScrollView extends XScrollView {
@@ -57,6 +58,13 @@ public class AutoHideXScrollView extends XScrollView {
 									RelativeLayout.BELOW, 0);
 							((RelativeLayout.LayoutParams) vglp).topMargin = 0;
 							setLayoutParams(vglp);
+
+							vglp = (ViewGroup.LayoutParams) view
+									.getLayoutParams();
+							if (vglp instanceof FrameLayout.LayoutParams) {
+								((FrameLayout.LayoutParams) vglp).topMargin = 0;
+								view.setLayoutParams(vglp);
+							}
 						}
 
 						getViewTreeObserver()
